@@ -8,8 +8,6 @@ from django.db.models import Q
 
 @login_required
 def dashboard(request):
-    if request.user.role == 'chofer':
-        return redirect('vehiculos:solicitar_vehiculo')
     return render(request, 'vehiculos/dashboard.html')
 
 @login_required
