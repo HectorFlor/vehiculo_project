@@ -3,6 +3,11 @@
 <head>
     <title>Gestión Vehículos</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    {% if user.is_authenticated %}
+        <p>Hola, {{ user.username }} | <a href="{% url 'logout' %}">Cerrar sesión</a></p>
+    {% else %}
+        <a href="{% url 'login' %}">Iniciar sesión</a>
+    {% endif %}
 </head>
 <body>
     <div class="container mt-4">

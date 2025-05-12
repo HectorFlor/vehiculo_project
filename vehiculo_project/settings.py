@@ -53,7 +53,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'vehiculo_project.wsgi.application'
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://localhost')
+    'default': dj_database_url.config(default='postgresql://vehiculo_project_user:NmY9zqxUhy2WPfrWuZqhVBfxrZzWggfm@dpg-d0gl58idbo4c73bgco8g-a/vehiculo_project',
+        conn_max_age=600
+    )
 }
 
 AUTH_USER_MODEL = 'vehiculos.User'
@@ -67,5 +69,6 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
 
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'
+LOGIN_URL = '/login/'
