@@ -1,0 +1,21 @@
+
+{% extends "base.html" %}
+{% block content %}
+  <h4>Checklists de Salida Pendientes de Verificación</h4>
+  <table class="table">
+    <thead><tr><th>Vehículo</th><th>Kilometraje</th><th>Extintor</th><th>Observaciones</th><th>Acción</th></tr></thead>
+    <tbody>
+      {% for checklist in checklists %}
+      <tr>
+        <td>{{ checklist.solicitud.vehiculo }}</td>
+        <td>{{ checklist.kilometraje }}</td>
+        <td>{{ checklist.extintor|yesno:"Sí,No" }}</td>
+        <td>{{ checklist.observaciones }}</td>
+        <td><a href="{% url 'vehiculos:confirmar_checklist' checklist.id %}" class="btn btn-success btn-sm">Confirmar</a></td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="5">No hay checklists pendientes.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

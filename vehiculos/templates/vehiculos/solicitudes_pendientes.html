@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h4>Solicitudes Pendientes</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Vehículo</th>
+        <th>Solicitante</th>
+        <th>Fecha de Solicitud</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for solicitud in solicitudes %}
+      <tr>
+        <td>{{ solicitud.vehiculo }}</td>
+        <td>{{ solicitud.solicitante }}</td>
+        <td>{{ solicitud.fecha_solicitud }}</td>
+        <td>
+          <a href="{% url 'vehiculos:aprobar_solicitud' solicitud.id %}" class="btn btn-success btn-sm">Aprobar</a>
+          <a href="{% url 'vehiculos:rechazar_solicitud' solicitud.id %}" class="btn btn-danger btn-sm">Rechazar</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4">No hay solicitudes pendientes.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

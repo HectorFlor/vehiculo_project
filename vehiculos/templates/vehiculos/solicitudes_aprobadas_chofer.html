@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container mt-4">
+    <h2>Solicitudes Aprobadas</h2>
+
+    {% if salida_pendiente %}
+      <h4>Checklist de Salida</h4>
+      <ul class="list-group mb-4">
+        {% for s in salida_pendiente %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Vehículo: {{ s.vehiculo.patente }} - Fecha: {{ s.fecha_solicitud }}
+            <a href="{% url 'vehiculos:completar_checklist_salida' s.id %}" class="btn btn-primary btn-sm">Completar Checklist</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if retorno_pendiente %}
+      <h4>Checklist de Retorno</h4>
+      <ul class="list-group">
+        {% for s in retorno_pendiente %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Vehículo: {{ s.vehiculo.patente }} - Fecha: {{ s.fecha_solicitud }}
+            <a href="{% url 'vehiculos:completar_checklist_retorno' s.id %}" class="btn btn-warning btn-sm">Completar Checklist</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if not salida_pendiente and not retorno_pendiente %}
+      <div class="alert alert-info mt-4">
+        No tienes solicitudes pendientes para salida o retorno.
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

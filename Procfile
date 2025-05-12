@@ -1,0 +1,1 @@
+web: gunicorn vehiculo_project.wsgi

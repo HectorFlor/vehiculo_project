@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>Bienvenido, {{ user.get_full_name }} ({{ user.role|capfirst }})</h2>
+    <p>Este es el panel principal. Desde aquí podrás acceder a las funcionalidades según tu rol.</p>
+
+    {% if user.role == 'chofer' or user.role == 'admin' %}
+      <a href="/solicitar/" class="btn btn-primary">Solicitar Vehículo</a>
+      <a href="/solicitudes/mis-aprobadas/" class="btn btn-primary">Mi Vehículo</a>
+    {% endif %}
+    {% if user.role == 'supervisor' or user.role == 'admin' %}
+      <a href="/solicitudes/pendientes/" class="btn btn-success">Revisar Solicitudes</a>
+    {% endif %}
+    {% if user.role == 'guardia' or user.role == 'admin' %}
+      <a href="/verificar-checklists/" class="btn btn-info">Verificar Checklists</a>
+      <a href="/verificar-checklists-retorno/" class="btn btn-info">Verificar Checklists Retorno</a>
+    {% endif %}
+    {% if user.role == 'admin' %}
+      <a href="/admin/" class="btn btn-dark">Administración</a>
+    {% endif %}
+  </div>
+{% endblock %}
